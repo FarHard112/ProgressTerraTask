@@ -22,10 +22,11 @@ namespace ProgressTerraTask.Controllers
         {
             var model = _rgDialogsClients.Init().Distinct();
 
-            var idClients = model.Select(x => x.IDClient).Distinct();
-
+            var idClients =
+                model.Select(x => x.IDClient).Distinct();
+            var startClientsCount = idClients.Count();
             var testCount = idClients.Except(Clients).Count();
-            if (testCount == 0)
+            if (Clients.Count() ==startClientsCount-testCount )
             {
                 var lastdialog = model.FirstOrDefault(x =>
                     x.IDClient == idClients.Last()).IDRGDialog;
